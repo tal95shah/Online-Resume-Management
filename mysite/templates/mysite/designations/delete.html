@@ -1,0 +1,54 @@
+{% extends 'mysite/index.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="col-lg-10">
+     <div class="card">
+          <div class="card-header">
+                <strong>Delete Designation</strong>
+            </div>
+            <div class="card-body card-block">
+                <form action="{% url 'deletedes' %}" method="POST" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="hf-email" class=" form-control-label">Name</label>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <select name="select" id="select" class="form-control">
+
+                                 {% for post in posts %}
+                                    <option value="{{ post.DesignationName }}">{{ post.DesignationName }}</option>
+                                 {% endfor %}
+
+                            </select>
+                        </div>
+                    </div>
+
+                     <div class="card-footer" >
+                         <form action="{% url 'adddes' %}">
+                                <button type="submit" class="btn btn-primary btn-sm" name="Edit"  >
+                                        <i class="fa fa-dot-circle-o" ></i> Edit
+                                 </button>
+                         </form>
+                        <button type="Delete" name="Delete" class="btn btn-danger btn-sm" onclick="{{ m }}">
+                            <i class="fa fa-ban" ></i> Delete
+                        </button>
+                          <label for="hf-password" class=" form-control-label">     {{ messagess}}
+                         </label>
+
+
+                     </div>
+                </form>
+
+            </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<!-- end document-->

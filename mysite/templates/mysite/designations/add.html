@@ -1,0 +1,57 @@
+{% extends 'mysite/index.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="col-lg-10">
+     <div class="card">
+          <div class="card-header">
+                <strong id="abcd">{{ title }} Designation</strong>
+            </div>
+            <div class="card-body card-block">
+                <form action="{% url 'adddes' %}" method="POST" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="hf-email" class=" form-control-label">Name</label>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <input id="desName" name="desname" placeholder=" " class="form-control" required  value="{{ dname }}" >
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="hf-password" class=" form-control-label">Status</label>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <select name="Select" id="select" class="form-control" required  >
+
+                                <option value="Available" >Available</option>
+                                <option value="Not Available">Not Available</option>
+                                <option value="Obsolete">Obsolete</option>
+                            </select>
+                        </div>
+                    </div>
+                    {% csrf_token %}
+                     <div class="card-footer" >
+                        <button type="submit" class="btn btn-primary btn-sm"  >
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-ban"></i> Reset
+                        </button>
+                         <label for="hf-password" class=" form-control-label">     {{ messagess}}
+                         </label>
+                     </div>
+                </form>
+
+            </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!-- end document-->

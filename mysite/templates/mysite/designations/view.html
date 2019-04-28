@@ -1,0 +1,44 @@
+{% extends 'mysite/index.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="col-lg-10">
+     <div class="card">
+          <div class="card-header">
+                <strong>Designation List</strong>
+            </div>
+            <div class="card-body card-block">
+                <form action="{% url 'adddept' %}" method="POST" class="form-horizontal">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+
+                          <th scope="col">Designation Name</th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for post in posts %}
+
+                        <tr>
+
+                          <td>{{ post.DesignationName }}</td>
+                          <td>{{ post.Status }}</td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                </form>
+
+            </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+<!-- end document-->

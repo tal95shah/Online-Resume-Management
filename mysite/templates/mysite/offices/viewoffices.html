@@ -1,0 +1,41 @@
+{% extends 'mysite/index.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="col-lg-10">
+     <div class="card">
+          <div class="card-header">
+                <strong>Offices List</strong>
+            </div>
+            <div class="card-body card-block">
+                <form action="{% url 'viewo' %}" method="POST" class="form-horizontal">
+                     <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">City Name</th>
+                          <th scope="col">HR Manager</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for post in posts %}
+
+                        <tr>
+                          <td>{{ post.Offices_Name }}</td>
+                          <td>{{ post.HRManager }}</td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                </form>
+
+            </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<!-- end document-->

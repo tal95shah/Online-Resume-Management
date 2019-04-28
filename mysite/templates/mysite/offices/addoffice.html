@@ -1,0 +1,58 @@
+{% extends 'mysite/index.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="col-lg-10">
+     <div class="card">
+          <div class="card-header">
+                <strong>{{ title }} Office</strong>
+            </div>
+            <div class="card-body card-block">
+                <form action="{% url 'addo' %}" method="POST" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="hf-email" class=" form-control-label">City</label>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <input id="hf-email" name="desname" placeholder=" " class="form-control" required value="{{ dname }}">
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="hf-email" class=" form-control-label">HR Manager Name</label>
+                        </div>
+                       <div class="col-12 col-md-3">
+                            <select name="select" id="select" class="form-control"required>
+
+                                 {% for post in posts %}
+                                    <option value="{{ post.HRName }}">{{ post.HRName }}</option>
+                                 {% endfor %}
+
+                            </select>
+                        </div>
+                    </div>
+                 <div class="card-footer" >
+                <button type="submit" class="btn btn-primary btn-sm"  >
+                    <i class="fa fa-dot-circle-o"></i> Submit
+                </button>
+                <button type="reset" class="btn btn-danger btn-sm">
+                    <i class="fa fa-ban"></i> Reset
+                </button>
+                       <label for="hf-password" class=" form-control-label">     {{ messagess}}
+                         </label>
+                 </div>
+                </form>
+
+            </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<!-- end document-->
