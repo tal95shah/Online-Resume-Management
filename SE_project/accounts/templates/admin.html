@@ -1,0 +1,36 @@
+{% extends "allauth/base.html" %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+</style>
+<body>
+
+<h1 style="font-size:60px; text-align: center; ">Admin</h1>
+
+<button type="button" style=" margin:auto; display:block;">Create New Account!</button><br /><br /><br />
+<button type="button" style=" margin:auto; display:block;">Delete Account</button><br /><br /><br />
+<button type="button" style=" margin:auto; display:block;">Change Password</button><br /><br /><br />
+
+
+
+</body>
+</html>
+
+{% endblock content %}
