@@ -13,7 +13,11 @@
 
     <div class="jumbotron"  id="gradient" >
       <div class="container">
-        <h1>Base Template</h1>
+        {% if user.is_authenticated  %}
+        <h1>{{ user }}</h1>
+        {% else %}
+        <h1>Django template</h1>
+        {% endif %}
         <p>Django {{ djangoversion }}  + Bootstrap 3  </p>
         <p>
             <a class="btn btn-primary btn-lg" role="button">Sign up »</a>

@@ -1,0 +1,210 @@
+{% extends "allauth/base.html" %}
+{% load static %}
+{% block content %}
+
+<ul style="background-color: #4CAF50;">
+  <li><a href="/jobhome">Post Job</a></li>
+  <li><a href="/internshiphome">Post Internship</a></li>
+  <li><a href="/show">Show All Jobs</a></li>  
+</ul>
+
+<div class="title animated wow fadeIn"><br/><br/>
+	<h3 style="text-align:center;">Post Job Details</h3>
+	<hr class="separator"/>
+</div>
+
+
+<div class = "Container">
+	<form action="create" method="POST">
+		{% csrf_token %}
+		<div class="form-group">
+				<label class="control-label">Job Title</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input type="text" name="jobtitle" placeholder="Web Developer" required class="form-control">
+						</div>
+				</div>
+		</div>
+
+		<div class="form-group">
+				<label class="control-label">Job Status</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input id="desig" list="listStatus" name="jobstatus" placeholder="Select Job Status" required class="form-control">
+							<datalist id="listStatus">
+								<option value="Open">Open</option>
+								<option value="Close">Close</option>
+							</datalist>
+						</div>
+				</div>
+		</div>
+	
+
+		<div class="form-group">
+				<label class="control-label">Designation</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input id="desig" list="listDesignations" name="designation" placeholder="Select Designation" required class="form-control">
+							<datalist id="listDesignations">
+								<option value="Junior">Junior</option>
+								<option value="Senior">Senior</option>
+								<option value="Team Lead">Team Lead</option>
+								<option value="Manager">Manager</option>
+							</datalist>
+						</div>
+				</div>
+		</div>
+		
+
+		<div class="form-group">
+				<label class="control-label">Job Description</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input type="textarea" name="decrpition" placeholder="Job Description Here" required class="form-control">
+						</div>
+				</div>
+		</div>
+
+		<div class="form-group">
+				<label class="control-label">Required Skills</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input type="text" name="skills" placeholder="C++ / Java" required class="form-control">
+						</div>
+				</div>
+		</div>
+
+
+		<div class="form-group">
+				<label class="control-label">Department</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input id="desig" list="listDepartment" name="department" placeholder="Select Destination" required class="form-control">
+							<datalist id="listDepartment">
+								<option value="Tecnical">Tecnical</option>
+								<option value="Human Resourse">Human Resourse</option>
+							</datalist>
+						</div>
+				</div>
+		</div>
+
+		<div class="form-group">
+				<label class="control-label">Min Education</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input id="desig" list="listEducation" name="minEdu" placeholder="Select Min Education" required class="form-control">
+							<datalist id="listEducation">
+								<option value="Bachlors">Bachlors</option>
+								<option value="Masters">Masters</option>
+							</datalist>
+						</div>
+				</div>
+		</div>
+
+		<div class="form-group">
+				<label class="control-label">Min Experience</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input type="number" name="experience" placeholder="0" required class="form-control">
+						</div>
+				</div>
+		</div>
+
+
+		<div class="form-group">
+				<label class="control-label">Salary</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input type="number" name="salary" placeholder="45,000 PKR" required class="form-control">
+						</div>
+				</div>
+		</div>
+
+
+		<div class="form-group">
+				<label class="control-label">Additional Benefits</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input type="text" name="benefits" placeholder="any additional benefits" class="form-control">
+						</div>
+				</div>
+		</div>
+
+
+		<div class="form-group">
+				<label class="control-label">Required Gender</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input id="desig" list="listGender" name="gender" placeholder="Select Gender" required class="form-control">
+							<datalist id="listGender">
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+								<option value="Both">Both</option>
+							</datalist>
+						</div>
+				</div>
+		</div>
+
+		<div class="form-group">
+				<label class="control-label">Age Limit</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input id="age" type="number" name="minAge" placeholder="min Age" required class="form-control">
+							<input id="age" type="number" name="maxAge" placeholder="max Age" required class="form-control">
+						</div>
+				</div>
+		</div>
+
+		<div class="form-group">
+				<label class="control-label">Location Details</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input id="city" list="listCity" name="city" placeholder="Select City" required class="form-control">
+							<datalist id="listCity">
+								<option value="Lahore">Lahore</option>
+								<option value="Karachi">Karachi</option>
+							</datalist>
+							<input id="location" type="text" name="location" placeholder="Location" required class="form-control">
+						</div>
+				</div>
+		</div>
+
+		<div class="form-group">
+				<label class="control-label">Closing Date</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input type="date" id="Cdate" name="date" placeholder="last date" required class="form-control">
+						</div>
+				</div>
+		</div>
+		<div class="form-group">
+				<label class="control-label">Attach Detailed Documents</label>
+				<div class="inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"></span>
+							<input type="file" name="fileDoc" accept="image/*" class="form-control">
+						</div>
+				</div>
+		</div>
+			<input type="submit" class="btn-block btn-success btn" value="Submit">
+	</form>
+</div>
+
+{% endblock %}
+
+
+

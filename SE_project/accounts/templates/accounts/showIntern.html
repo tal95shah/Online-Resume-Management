@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Admin Pannel</title>
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/header.css'%} ">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	
+	
+</head>
+
+<body>
+{% block body %}
+
+{% csrf_token %}
+<ul style="background-color: #4CAF50;">
+  <li><a href="/jobhome">Post Job</a></li>
+  <li><a href="/internshiphome">Post Internship</a></li>
+  <li><a href="/display">Show All Internships</a></li>
+  <li><a href="#">Sign Out</a></li>
+</ul>
+
+	
+	
+<!--	
+	
+<table class="table table-bordered">
+    <thead class="alert-warning">
+        <tr>
+            <th>Job Title</th>
+            <th>Description</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in Jobss %}
+        <tr>
+            <td>{{ job.title }}</td>
+            <td>{{ job.descriptions }}</td>
+			<td> <img src="{{ job.document.url }}"></td>
+			<td> {{ job.document.url }}</td>
+			
+            <td><center><a class="btn btn-sm btn-warning" href="edit/{{ job.id }}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a class="btn btn-sm btn-danger" href="delete/{{ job.id }}"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+-->
+<br/><br/><br/><br/>
+
+<div class = "forum">
+	<h1>Edit or Delete Internships</h1>
+	
+	
+	  <table>
+		  <tr>
+			<th>Internship Title</th>
+			<th>Description</th>
+			<th>Closing Date</th>
+			<th>Attached File</th>
+			<th>Edit/Delete</th>
+		  </tr>
+		   {% for in in int %}
+		  <tr>
+			<td>{{ in.title }}</td>
+			<td>{{ in.description }}</td>
+			<td>{{ in.closing_date }}</td>
+			<td>{{ in.attached_file.url }}</td>
+			<td>
+			<a class="butt" href="edit1/{{ in.id }}"> <span style="background-color:#4CAF50;" >Edit</span> </a> 
+			<a class="butt" href="delIntern/{{ in.id }}"> <span style="background-color:red;" > Delete </span>  </a>
+			
+			<!--
+			<input class="butt" id="appbutt" type="button" value="Approve" style="background-color:#4CAF50">
+			<input class="butt" id="dsapbutt" type="button" value="Disaprove" style="background-color:red">
+			-->
+			</td>
+		  </tr>
+		  {% endfor %}
+		  
+		</table>
+</div>		
+	
+	
+	
+	
+	{% endblock %}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>	

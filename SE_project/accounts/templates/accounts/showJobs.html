@@ -1,0 +1,52 @@
+{% load static %}
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/header.css'%} ">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	
+
+{% block content %}
+
+{% csrf_token %}
+<ul style="background-color: #4CAF50;">
+  <li><a href="/jobhome">Post Job</a></li>
+  <li><a href="/internshiphome">Post Internship</a></li>
+  <li><a href="/show">Show All Jobs</a></li>
+  <li><a href="#">Sign Out</a></li>
+</ul>
+
+
+<br/><br/><br/><br/>
+
+<div class = "forum">
+	<h1>Edit or Delete Jobs</h1>
+
+	  <table>
+		  <tr>
+			<th>Job Title</th>
+			<th>Description</th>
+			<th>Closing Date</th>
+			<th>Attached File</th>
+			<th>Edit/Delete</th>
+		  </tr>
+		   {% for job in Jobss %}
+		  <tr>
+			<td>{{ job.title }}</td>
+			<td>{{ job.descriptions }}</td>
+			<td>{{ job.closing_date }}</td>
+		
+			<td>{{ job.document.url }}</td>
+			<td>
+			<a class="butt" href="edit/{{ job.id }}"> <span style="background-color:#4CAF50;" >Edit</span> </a> 
+			<a class="butt" href="delete/{{ job.id }}"> <span style="background-color:red;" > Delete </span>  </a>
+			
+			</td>
+		  </tr>
+		  {% endfor %}
+		  
+		</table>
+</div>		
+	
+	
+	{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "_layouts/base.html" %}
+
+{% block css %}
+{{block.super}}
+
+{% endblock css %}
+
+{% block page_title %}Your Site - Home{% endblock %}
+{% block page_class %}home-page{% endblock %}
+
+
+{% block maincontent %}
+    {% if user.is_authenticated %}
+    <h1>Resume</h1>
+    <div class="grid-20">
+        <ul>
+            <li><a href="#">Edit Resume</a></li>
+        </ul>
+    </div>
+    <div class="grid-80">
+        {% if not resume.current_designation %}
+            <p>You have an empty  Resume.</p>
+            <a href="{% url 'accounts:edit_resume' %}">Add some info</a>
+        {% else %}
+             <br>
+            <div class="grid-100">
+                <p><span class="underline">User Name</span>: {{ resume.applicant.user.username }}</p>
+                <p><span class="underline">Email</span>: {{ resume.applicant.email }}</p>
+                <p><span class="underline">Contact Number</span>: {{ resume.applicant.contact_num1 }}</p>
+                <p><span class="underline">address</span>: {{ resume.applicant.address }}</p>
+                <p><span class="underline">Job</span>: {{ resume.Job }}</p>
+                <p><span class="underline">Internship</span>: {{ resume.internship.title }}</p>
+                <p><span class="underline">current_employer</span>: {{ resume.current_employer }}</p>
+                <p><span class="underline">current_designation</span>: {{ resume.current_designation }}</p>
+                <p><span class="underline">current_designation</span>: {{ resume.current_designation }}</p>
+            </div>
+
+        {% endif %}
+        {% else %}
+        {% endif %}
+    </div>
+{% endblock %}

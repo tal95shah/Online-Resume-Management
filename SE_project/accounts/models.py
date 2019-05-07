@@ -23,7 +23,6 @@ class Hr_Manger(models.Model):
         def __str__(self):
             return self.name
 
-
 class Applicant(models.Model):
         user = models.OneToOneField(User, on_delete=models.CASCADE)
         image = models.ImageField(
@@ -42,8 +41,6 @@ class Applicant(models.Model):
         def __str__(self):
             return self.user.username
 
-
-
 class Reference(models.Model):
       applicant = models.ForeignKey(Applicant, on_delete=models.PROTECT)
       name_of_refrence=models.CharField(max_length=20)
@@ -55,10 +52,9 @@ class Reference(models.Model):
       def __str__(self):
           return self.name_of_refrence
 
-
 class Job(models.Model):
     title =models.CharField(max_length=20)
-    descriptions=models.CharField(max_length=20)
+    descriptions=models.CharField(max_length=100)
     designation=models.CharField(max_length=50)
     required_skills=models.CharField(max_length=50)
     locations=models.CharField(max_length=50)
@@ -70,10 +66,31 @@ class Job(models.Model):
     status=models.CharField(max_length=2)
     salary=models.PositiveIntegerField()
     additional_benefits=models.CharField(max_length=50)
-
+    document=models.FileField(
+        default = 'no-file.file'
+    )
+   
     def __str__(self):
-        return self.title
+        return self.title + " " + self.descriptions
 
+class Intern(models.Model):
+	title=models.CharField(max_length=20)
+	duration=models.PositiveIntegerField()
+	description=models.CharField(max_length=100)
+	skills=models.CharField(max_length=50)
+	department=models.CharField(max_length=50)
+	status=models.CharField(max_length=5)
+	city=models.CharField(max_length=50) 
+	location=models.CharField(max_length=50)
+	startdate=models.DateField()
+	enddate=models.DateField()
+	closing_date=models.DateField()
+	attached_file=models.FileField(
+        default = 'no-file.file'
+    )
+	
+	def __str__(self):
+		return self.title + " " + self.description
 
 class Internship(models.Model):
     title=models.CharField(max_length=20)
@@ -88,7 +105,6 @@ class Internship(models.Model):
             default = 'no-img.jpg',
             blank=True
         )
-
 
 class Resume(models.Model):
     applicant=models.OneToOneField(Applicant, on_delete=models.CASCADE)
@@ -108,7 +124,6 @@ class Resume(models.Model):
     def __str__(self):
         return self.applicant.username
 
-
 class InterviewQuestion(models.Model):
     interview_question=models.CharField(max_length=50)
     question_correct_answer=models.CharField(max_length=100)
@@ -124,7 +139,6 @@ class Interview(models.Model):
     interview_question_candidate_answer =models.PositiveIntegerField()
     interview_question_id=models.ForeignKey(InterviewQuestion,on_delete=models.PROTECT)
     job_status=models.CharField(max_length=20)
-
 
 class Experience(models.Model):
     applicant=models.ForeignKey(Applicant,on_delete=models.PROTECT)
@@ -164,10 +178,86 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-
+     
+class signup(models.Model):
+    first_name=models.CharField(max_length=30)
+    last_name=models.CharField(max_length=30)
+    user_type = models.CharField(max_length=30)
+    username = models.CharField(max_length=30,unique=True)
+    email=models.CharField(max_length=30)
+    password=models.CharField(max_length=30)
+    security_question=models.CharField(max_length=30)
+    security_answer=models.CharField(max_length=30)
+    def __str__(self):
+        return self.first_name
 
 def create_profile(sender, **kwargs):
     if kwargs['created']:
         profile = Profile.objects.create(user=kwargs['instance'])
 
 post_save.connect(create_profile, sender=User)
+
+
+################################    TEAM Galoters   #####################################
+
+class Department(models.Model):
+    name=models.CharField(max_length=20)
+
+class Field(models.Model):
+    name=models.CharField(max_length=20)
+
+class Institute(models.Model):
+    name=models.CharField(max_length=20)
+
+class Degree(models.Model):
+    name=models.CharField(max_length=20)
+
+class InternshipExperience(models.Model):
+    applicant=models.ForeignKey(User,on_delete=models.PROTECT)
+    summary=models.CharField(max_length=1000)
+    months=models.IntegerField()
+    responsibilities=models.CharField(max_length=1000)
+    organization=models.CharField(max_length=100)
+
+class InternshipReference(models.Model):
+    applicant = models.ForeignKey(User, on_delete=models.PROTECT)
+    name_of_refrence=models.CharField(max_length=100)
+    affiliation_of_reference=models.CharField(max_length=100)
+    contact_of_reference=models.CharField(max_length=100)
+    email_of_reference=models.EmailField(default='fast@gmail.com')
+
+    def __str__(self):
+        return self.name_of_refrence
+
+class InternshipResume(models.Model):
+    applicant=models.OneToOneField(User, on_delete=models.CASCADE)
+    fName=models.CharField(max_length=100,null=True)
+    mName=models.CharField(max_length=100)
+    lName=models.CharField(max_length=100,null=True)
+    email=cnic=models.CharField(max_length=100,null=True)
+    dob = models.DateField()
+    cnic=models.CharField(max_length=100)
+    nationality=models.CharField(max_length=100)
+    contact1=models.CharField(max_length=100)
+    contact2=models.CharField(max_length=100)
+    address=models.CharField(max_length=1000)
+    country=models.CharField(max_length=100)
+    city=models.CharField(max_length=100)
+    objective=models.CharField(max_length=1000)
+    department=models.CharField(max_length=100)
+    field=models.CharField(max_length=100)
+    skills=models.CharField(max_length=1000)
+    extra_curricular=models.CharField(max_length=1000)
+    other_interests=models.CharField(max_length=1000)
+    
+    cdeg_name=models.CharField(max_length=100)
+    cdeg_inst=models.CharField(max_length=100)
+    cdeg_date=models.DateField()
+    ldeg_name=models.CharField(max_length=100)
+    ldeg_inst=models.CharField(max_length=100)
+    ldeg_grade=models.CharField(max_length=100)
+    sdeg_name=models.CharField(max_length=100)
+    sdeg_inst=models.CharField(max_length=100)
+    sdeg_grade=models.CharField(max_length=100)
+    add_qual=models.CharField(max_length=1000)
+

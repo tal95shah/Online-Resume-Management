@@ -1,0 +1,508 @@
+{% extends "allauth/base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link id="theme-style" rel="stylesheet" href="{% static 'css/orbit-1.css' %}">
+
+
+<div class="container">
+    <h2>My Resume For Internships</h2>
+        <label style="color:red;">Error Message</label>
+        <form method="POST">
+            {% csrf_token %}
+            <h3>Personal Details</h3>
+            <div class="form-group">
+                <label class="control-label">Name</label>
+                <div class="row">
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="firstName" name="fname" placeholder="First Name" class="form-control"   value="{{user.first_name}}" type="text"></div>
+                    </div>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="mname" name="mname" placeholder="Middle Name" class="form-control"   value="" type="text"></div>
+                    </div>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="lastName" name="lname" placeholder="Last Name" class="form-control"   value="{{user.last_name}}" type="text"></div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="form-group">
+                    <label class=" control-label">Date of Birth</label>
+                    <div class=" inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="email" name="dob" placeholder="YYYY-MM-DD" class="form-control"   value="" type="text"></div>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                    <label class=" control-label">CNIC</label>
+                    <div class=" inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"></span><input id="cnic" name="cnic" placeholder="cnic" class="form-control"   value="" type="text"></div>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                    <label class=" control-label">Nationality</label>
+                    <div class=" inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"></i></span><input id="nation" name="nation" placeholder="Nationality" class="form-control"   value="" type="text"></div>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                    <label class=" control-label">Email</label>
+                    <div class=" inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="email" name="email" placeholder="Email" class="form-control"   value="{{user.email}}" type="text"></div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone Number</label>
+                <div class="row">
+                        <div class="col-md-6 inputGroupContainer">
+                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="phone1" name="phone1" placeholder="Phone Number 1" class="form-control"   value="" type="text"></div>
+                        </div>
+                        <div class="col-md-6 inputGroupContainer">
+                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="phone2" name="phone2" placeholder="Phone Number 2" class="form-control"   value="" type="text"></div>
+                        </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Address</label>
+                <div class="row">
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="addressLine1" name="address" placeholder="House #, Streat #, Town" class="form-control"   value="" type="text"></div>
+                    </div>
+                    <div class="col-md-2 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-globe"></i></span>
+                            <select class="countries selectpicker form-control" id="countryId" name="country">
+                                <option>Country</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-globe"></i></span>
+                            <select class="states selectpicker form-control" id="stateId">
+                                <option>Select State</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-globe"></i></span>
+                            <select class="cities selectpicker form-control" id="cityId" name="city">
+                                <option>Select City</option>
+                            </select>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Tentative Joining Date</label>
+                <div class="inputGroupContainer">
+                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="tdate" name="tdate" placeholder="YYYY-MM-DD" class="form-control"   value="" type="text"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                    <label class="control-label">Skills (Comma Seperated)</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"></span><textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="skills"></textarea></div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Objective</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group"><span class="input-group-addon"></span><textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="obj"></textarea></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label">Department Of Interest</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                        <select class="selectpicker form-control" onchange="CheckOther(this.value)" name="dep">
+                            <option>Select Department</option>
+                            {% for department in departments %}
+                                <option>{{ department.name }}</option>
+                            {% endfor %}
+
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="inputGroupContainer" style="display: none" id="otherDeptCont">
+                    <div class="input-group"><span class="input-group-addon"></i></span><input id="otherDept" name="otherdep" placeholder="Enter if Department not in list" class="form-control"   value="" type="text"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Field Of Interest</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                        <select class="selectpicker form-control" onchange="CheckOtherF(this.value)" name="field" >
+                            <option>Select Field</option>
+                            {% for field in fields %}
+                                <option>{{ field.name }}</option>
+                            {% endfor %}
+                            <option>Other</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="inputGroupContainer" style="display: none" id="otherFieldCont">
+                        <div class="input-group"><span class="input-group-addon"></i></span><input id="otherField" name="otherField" placeholder="Enter if Department not in list" class="form-control"   value="" type="text"></div>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Internship Duration (number of weeks)</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group"><span class="input-group-addon"></span><input id="period" name="period" class="form-control"   value="" type="number"></div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Extra Cirricular Activities</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group"><span class="input-group-addon"></span><textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="extra"></textarea></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label">Other Interests</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group"><span class="input-group-addon"></span><textarea class="form-control" id="exampleFormControlTextarea1" name="interests" rows="2"></textarea></div>
+                </div>
+            </div>
+            <div>
+                <h3>Current Degree</h3>
+                <div class="form-group">
+                    <label class="control-label">Name of Degree</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                            <select class="selectpicker form-control" onchange="CheckOther1(this.value)" name="cdeg">
+                                <option>Select Degree</option>
+                                {% for degree in degrees %}
+                                    <option>{{ degree.name }}</option>
+                                {% endfor %}
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputGroupContainer" style="display: none" id="curNameOther">
+                        <div class="input-group"><span class="input-group-addon"></i></span><input id="otherDept" name="otherCdeg" placeholder="Enter if Degree not in list" class="form-control"   value="" type="text"></div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label class="control-label">Name of Institute</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                            <select class="selectpicker form-control" onchange="CheckOther2(this.value)" name="cins" >
+                                <option>Select Institute</option>
+                                {% for institute in institutes %}
+                                    <option>{{ institute.name }}</option>
+                                {% endfor %}
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputGroupContainer" style="display: none" id="curInsOther">
+                            <div class="input-group"><span class="input-group-addon"></i></span><input id="otherField" name="otherCins" placeholder="Enter if Institute not in list" class="form-control"   value="" type="text"></div>
+                        </div>
+                </div>
+                <div class="form-group">
+                        <label class="control-label">Expected Date Of Completion</label>
+                        <div class="inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="tdate" name="cdate" placeholder="YYYY/MM/DD" class="form-control"   value="" type="text"></div>
+                        </div>
+                </div>
+                </div>
+                <hr>
+            <div>
+                <h3>Last Degree</h3>
+                <div class="form-group">
+                    <label class="control-label">Name of Degree</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                            <select class="selectpicker form-control" onchange="CheckOther3(this.value)" name="ldeg">
+                                <option>Select Degree</option>
+                                {% for degree in degrees %}
+                                    <option>{{ degree.name }}</option>
+                                {% endfor %}
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputGroupContainer" style="display: none" id="lastNameOther">
+                        <div class="input-group"><span class="input-group-addon"></i></span><input id="otherDept" name="otherLdeg" placeholder="Enter if Degree not in list" class="form-control"   value="" type="text"></div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label class="control-label">Name of Institute</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                            <select class="selectpicker form-control" onchange="CheckOther4(this.value)" name="lins">
+                                <option>Select Institute</option>
+                                {% for institute in institutes %}
+                                    <option>{{ institute.name }}</option>
+                                {% endfor %}
+                                <option>Other</option>
+    
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputGroupContainer" style="display: none" id="lastInsOther">
+                        <div class="input-group"><span class="input-group-addon"></i></span><input id="otherField" name="otherLins" placeholder="Enter if Institute not in list" class="form-control"   value="" type="text"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Grades</label>
+                    <div class="inputGroupContainer">
+                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="tdate" name="lgrade" placeholder="CGPA/Percentage/Division" class="form-control"   value="" type="text"></div>
+                    </div>
+                </div>
+                </div><hr>
+                <div>
+                <h3>Second Last Degree</h3>
+                <div class="form-group">
+                    <label class="control-label">Name of Degree</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                            <select class="selectpicker form-control" onchange="CheckOther5(this.value)" name="sdeg">
+                                <option>Select Degree</option>
+                                {% for degree in degrees %}
+                                    <option>{{ degree.name }}</option>
+                                {% endfor %}
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputGroupContainer" style="display: none" id="secNameOther">
+                        <div class="input-group"><span class="input-group-addon"></i></span><input id="otherDept" name="otherSdeg" placeholder="Enter if Degree not in list" class="form-control"   value="" type="text"></div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label class="control-label">Name of Institute</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                            <select class="selectpicker form-control" onchange="CheckOther6(this.value)" name="sins" >
+                                <option>Select Institute</option>
+                                {% for institute in institutes %}
+                                    <option>{{ institute.name }}</option>
+                                {% endfor %}
+                                <option>Other</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputGroupContainer" style="display: none" id="secInsOther">
+                        <div class="input-group"><span class="input-group-addon"></i></span><input id="otherField" name="otherSins" placeholder="Enter if Institute not in list" class="form-control"   value="" type="text"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label class="control-label">Grades</label>
+                        <div class="inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="cdate" name="sgrade" placeholder="CGPA/Percentage" class="form-control"   value="" type="text"></div>
+                        </div>
+                </div>
+            </div><hr>
+            <div>
+                <h3>Additional Qualifications</h3>
+                <div class="form-group">
+                    <label class="control-label">Seperate Each Qualification with a comma</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"></span><textarea class="form-control" id="exampleFormControlTextarea1" name="addqual" rows="3"></textarea></div>
+                    </div>
+                </div>
+            </div>
+            <div id="items">
+                <div id = item>
+                    <h3>Internship</h3>
+                    <div class="form-group">
+                        <label class="control-label">Internship Summary</label>
+                        <div class="inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"></span><textarea name="intsum" class="form-control" id="intsum" rows="2"></textarea></div>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="control-label">Name of Organization</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"><span class="input-group-addon"></i></span><input id="orgname" name="orgname" class="form-control"   value="" type="text"></div>
+                        </div>
+                
+                        </div>
+                        <div class="form-group">
+                        <label class="control-label">Responsiblities</label>
+                        <div class="inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"></span><textarea class="form-control" id="resp" rows="2" name="responsiblities"></textarea></div>
+                        </div>
+                        </div>
+                    <div class="form-group">
+                        <label class="control-label">Number of Months</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon" style="max-width: 100%;"></i></span>
+                                <select class="selectpicker form-control" name="months" id="months">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div><hr>
+                </div>
+            </div>
+            <button type="button" class="add_field_button btn btn-primary btn-block">Add Another Internship</button><hr><br><br><br>
+            <div id="items2">
+                <h3>References</h3>
+                <div id="item2">
+                    <div class="form-group">
+                        <label class="control-label">Reference</label>
+                        <div class="row">
+                            <div class="col-md-6 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="rname" name="rname" placeholder="Name" class="form-control"   value="" type="text"></div>
+                            </div>
+                            <div class="col-md-6 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="affil" name="affil" placeholder="Affiliation" class="form-control"   value="" type="text"></div>
+                            </div>
+                            <div class="col-md-6 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="rcontact" name="rcontact" placeholder="Contact" class="form-control"   value="" type="text"></div>
+                            </div>
+        
+                            <div class=" col-md-6 inputGroupContainer">
+                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="remail" name="remail" placeholder="Email" class="form-control"   value="" type="text"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add_field_button2 btn btn-primary btn-block">Add Another Reference</button><br><br><br>
+            <input type="submit" class="btn-block btn btn-success" value="Proceed"/>
+        </form><br><br><br>
+</div>
+<script>
+    $(document).ready(function(){
+        var max_fields = 4; //maximum input boxes allowed
+        var wrapper = $("#items"); //Fields wrapper
+        var add_button = $(".add_field_button"); //Add button ID
+
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+            if(x < max_fields){ //max input box allowed
+                var newHtml = document.getElementById("item")
+                x++; //ext box increment
+                $(wrapper).append(newHtml.innerHTML); //add input box
+            }
+        });
+
+        var max_fields2 = 4; //maximum input boxes allowed
+        var wrapper2 = $("#items2"); //Fields wrapper
+        var add_button2 = $(".add_field_button2"); //Add button ID
+        var x2 = 1; //initlal text box count
+
+        $(add_button2).click(function(e){ //on add input button click
+            e.preventDefault();
+            if(x2 < max_fields2){ //max input box allowed
+
+                var newHtml2 = document.getElementById("item2")
+                x2++; //text box increment
+                $(wrapper2).append(newHtml2.innerHTML); //add input box
+            }
+        });
+    });
+
+    function CheckOther(val){
+        var element=document.getElementById('otherDeptCont');
+        if(val=='Other')
+            element.style.display='block';
+        else  
+            element.style.display='none';
+    }
+
+    function CheckOtherF(val){
+        var element=document.getElementById('otherFieldCont');
+        if(val=='Other')
+            element.style.display='block';
+        else  
+            element.style.display='none';
+    }
+
+    function CheckOther1(val){
+        var element=document.getElementById('curNameOther');
+        if(val=='Other')
+            element.style.display='block';
+        else  
+            element.style.display='none';
+    }
+
+    function CheckOther2(val){
+        var element=document.getElementById('curInsOther');
+        if(val=='Other')
+            element.style.display='block';
+        else  
+            element.style.display='none';
+    }
+
+    function CheckOther3(val){
+        var element=document.getElementById('lastNameOther');
+        if(val=='Other')
+            element.style.display='block';
+        else  
+            element.style.display='none';
+    }
+
+    function CheckOther4(val){
+        var element=document.getElementById('lastInsOther');
+        if(val=='Other')
+            element.style.display='block';
+        else  
+            element.style.display='none';
+    }
+
+    function CheckOther5(val){
+        var element=document.getElementById('secNameOther');
+        if(val=='Other')
+            element.style.display='block';
+        else  
+            element.style.display='none';
+    }
+
+    function CheckOther6(val){
+        var element=document.getElementById('secInsOther');
+        if(val=='Other')
+            element.style.display='block';
+        else  
+            element.style.display='none';
+    }      
+</script>
+
+<script src="//geodata.solutions/includes/countrystatecity.js"></script>
+{% endblock content %}

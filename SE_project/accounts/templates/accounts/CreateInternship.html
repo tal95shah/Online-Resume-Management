@@ -1,0 +1,126 @@
+{% extends "allauth/base.html" %}
+{% load static %}
+{% block content %}
+
+<ul">
+  <li><a href="/jobhome">Post Job</a></li>
+  <li><a href="/internshiphome">Post Internship</a></li>
+  <li><a href="/display">Show All Internships</a></li>
+</ul>
+
+<div class="title animated wow fadeIn"><br/><br/>
+
+	<h3 style="text-align:center;">Post Internship Details</h3>
+		<a href="display"> <button type="button" class="btn btn-primary">Primary</button> </a>
+	<br>
+	<hr class="separator"/>
+</div>
+
+<div class="container">
+	<form action="createinternship" method="POST">
+		{% csrf_token %}
+
+		<div class="form-group">
+			<label class="control-label">Internship Title</label>
+				<div class="inputGroupContainer">
+					<div class="input-group"><span class="input-group-addon"></span><input type="text" name="title" placeholder="Web Developer" class="form-control" required></div>
+				</div>	
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Description</label>
+			<div class="inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"></span><input type="textarea" name="description" placeholder="Job Description Here" required class="form-control"></div>
+			</div>	
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Duration</label>
+			<div class="inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"></span><input type="number" name="duration" placeholder="2 month" required class="form-control"></div>
+			</div>	
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Required Skills</label>
+			<div class="inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"></span><input type="text" name="skills" placeholder="C++ / Java" required class=form-control></div>
+			</div>	
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Department</label>
+			<div class="inputGroupContainer">
+				<div class="input-group">
+					<span class="input-group-addon" style="max-width: 100%;"></i></span>
+					<input id="desig" name="dept" list="listDepartment" placeholder="Select Destination" required class="form-control">
+					<datalist id="listDepartment">
+						<option value="Tecnical">Tecnical</option>
+						<option value="Human Resourse">Human Resourse</option>
+					</datalist>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Internship Status</label>
+			<div class="inputGroupContainer">
+				<div class="input-group">
+					<span class="input-group-addon" style="max-width: 100%;"></i></span>
+					<input id="desig" list="listStatus" name="status" placeholder="Select Job Status" required class="form-control">
+					<datalist id="listStatus">
+						<option value="Open">Open</option>
+						<option value="Close">Close</option>
+					</datalist>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Attach Details Document</label>
+			<div class="inputGroupContainer">
+				<div class="input-group">
+					<input type="file" name="fileDoc" accept="image/*" class="form-control">
+				</div>
+			</div>
+		</div>
+
+	
+		<div class="form-group">
+			<label class="control-label">Location Detail</label>
+			<div class="inputGroupContainer">
+				<input id="city" list="listCity" name="city" placeholder="Select City" required class="form-control">
+				<datalist id="listCity">
+					<option value="Lahore">Lahore</option>
+					<option value="Karachi">Karachi</option>
+				</datalist>
+				<input id="location" type="text" name="location" placeholder="Location" required class="form-control">
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<label class="control-label">Internship Period</label>
+			<div class="inputGroupContainer">
+				<div class="input-group">
+						<span class="input-group-addon"></span><input type="date" id="Cdate" name="startdate" placeholder="Start Date" required class="form-control">
+				</div>
+				<div class="input-group">
+						<span class="input-group-addon"></span><input type="date" id="Cdate" name="enddate" placeholder="End Date" required class="form-control">
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Closing Date</label>
+			<div class="inputGroupContainer">
+				<div class="input-group">
+					<span class="input-group-addon"></span><input type="date" id="Cdate" name="date" placeholder="last date" required class="form-control">
+				</div>
+			</div>
+			</div>
+		<input type="submit" value="Submit" class="btn-block btn btn-success">
+	</form>
+</div>
+
+{% endblock %}
