@@ -11,6 +11,6 @@ Bootstrap3 - Frontend<br>
 To add front end code
 
 -  create html file in accounts/templates
--  copy paste code from accounts/templates/user/profile.html
+-  copy paste code from accounts/templates/layout/home.html
 -  Remove the code within {% block content %} {% endblock content %}
 -  Write your own html within {% block content %} {% endblock content %}
