@@ -1,3 +1,4 @@
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -261,3 +262,51 @@ class InternshipResume(models.Model):
     sdeg_grade=models.CharField(max_length=100)
     add_qual=models.CharField(max_length=1000)
 
+# DEV GURU
+
+class Resume_Job(models.Model):
+    applicant=models.OneToOneField(Applicant, on_delete=models.CASCADE)
+    job=models.ForeignKey(Job,on_delete=models.PROTECT)
+    current_employer=models.CharField(max_length=20)
+    current_designation=models.CharField(max_length=20)
+    current_organization_experience =models.CharField(max_length=10)
+    objective=models.CharField(max_length=20)
+    department=models.CharField(max_length=20)
+    joining_date=models.DateField()
+    skills=models.CharField(max_length=20)
+    min_salary=models.PositiveIntegerField()
+    extra_curricular=models.CharField(max_length=50)
+    other_interests=models.CharField(max_length=50)
+
+
+class Resume_Internship(models.Model):
+    applicant=models.OneToOneField(Applicant, on_delete=models.CASCADE)
+    internship=models.ForeignKey(Internship,on_delete=models.PROTECT,default='')
+    current_employer=models.CharField(max_length=20)
+    current_designation=models.CharField(max_length=20)
+    current_organization_experience =models.CharField(max_length=10)
+    objective=models.CharField(max_length=20)
+    department=models.CharField(max_length=20)
+    joining_date=models.DateField()
+    skills=models.CharField(max_length=20)
+    min_salary=models.PositiveIntegerField()
+    extra_curricular=models.CharField(max_length=50)
+    other_interests=models.CharField(max_length=50)
+
+class Interview_Job(models.Model):
+    applicant=models.ForeignKey(Applicant,on_delete=models.PROTECT)
+    job =models.ForeignKey(Job,on_delete=models.PROTECT)
+    time_acknowledged=models.CharField(max_length=2)
+    started_at =models.DateTimeField()
+    interview_question_candidate_answer =models.PositiveIntegerField()
+    interview_question_id=models.ForeignKey(InterviewQuestion,on_delete=models.PROTECT)
+    job_status=models.CharField(max_length=20)
+
+class Interview_Internship(models.Model):
+    applicant=models.ForeignKey(Applicant,on_delete=models.PROTECT)
+    internship =models.ForeignKey(Internship,on_delete=models.PROTECT,default='')
+    time_acknowledged=models.CharField(max_length=2)
+    started_at =models.DateTimeField()
+    interview_question_candidate_answer =models.PositiveIntegerField()
+    interview_question_id=models.ForeignKey(InterviewQuestion,on_delete=models.PROTECT)
+    job_status=models.CharField(max_length=20)

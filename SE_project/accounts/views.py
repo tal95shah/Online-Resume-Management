@@ -421,3 +421,64 @@ def edit_intershipresume(request):
         }
 
     return render(request, 'accounts/res3.html',context)
+"""
+DEV GURU
+"""
+def view_jobs_hr(request):
+    username = 'john'
+    password = 'johnpassword'
+    customUser = authenticate(request, username=username, password=password)
+    if customUser.is_authenticated:
+        user = customUser
+        jobs = models.Job.objects.all()
+        context = {'user':user,
+        'jobs':jobs}
+        return render(request,"accounts/view_jobs_hr.html",context)
+
+def view_job_hr(request,num=100):
+    print(num)
+    username = 'john'
+    password = 'johnpassword'
+    customUser = authenticate(request, username=username, password=password)
+    if customUser.is_authenticated:
+        user = customUser
+        job = models.Job.objects.get(pk=num)
+        applicant_ids = set()
+        for app_who_appl_to_job in models.Applicant_Apply_Job.objects.all():
+            if(app_who_appl_to_job.job.id == num):
+                applicant_ids.add(app_who_appl_to_job.applicant.id)
+        applicants = models.Applicant.objects.filter(pk__in = applicant_ids)
+        context = {'job':job,'user':user,
+        'applicants':applicants}
+        return render(request,"accounts/view_job_hr.html",context)
+
+def schedule_interview_hr(request,jobId=100,applicantId=100):
+    print("JOB ID:"+str(jobId))
+    print("APPLICANT ID:"+str(applicantId))
+    username = 'abdullahkhan'
+    password = 'Strong.96'
+    customUser = authenticate(request, username=username, password=password)
+    if customUser.is_authenticated:
+        user = customUser
+        email_msg = "Email Sent Successfully"
+        job = models.Job.objects.get(pk=jobId)
+        applicant = models.Applicant.objects.get(pk=applicantId)
+        context = {'job':job,'user':user,
+        'applicant':applicant,
+        'email_msg':email_msg
+        }
+    try:
+        with smtplib.SMTP('smtp.gmail.com',587) as smtp:
+            smtp.ehlo()
+            smtp.starttls()
+            smtp.ehlo()
+            smtp.login("onlineresumeforse2019@gmail.com","onlineresume.666")
+            subject = "Interview Invitation - Select Timings"
+            body = "2-3pm,3-4pm,5-6pm"
+            msg = f"Subject:{subject}\n\n{body}"
+            smtp.sendmail("onlineresumeforse2019@gmail.com",user.email,msg)
+    except Exception as e:
+        print(e)
+    return render(request,"accounts/schedule_interview_hr.html",context)
+
+

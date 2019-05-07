@@ -31,6 +31,9 @@ urlpatterns = [
     url(r'^edit1/update1/(?P<id>\d+)$', views.update1, name='update1'),
     url(r'^delIntern/(?P<id>\d+)$', views.delIntern, name='delIntern'),
     path('res',views.intershipresume,name='internship-resume'),
-	path('rese',views.edit_intershipresume,name='internship-resume')
-    #######TEAM APLHA#######
+	path('rese',views.edit_intershipresume,name='internship-resume'),
+    #######DEV GURU#######
+    path('hr/jobs',views.view_jobs_hr,name="view_jobs_hr"),
+    path('hr/jobs/<int:num>',views.view_job_hr,name="view_job_hr"),
+    path('hr/jobs/<int:jobId>/applicant/<int:applicantId>/interview',views.schedule_interview_hr,name="schedule_interview_hr")
 ]
